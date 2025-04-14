@@ -1,0 +1,9 @@
+{
+  "alertId": "uuid",
+  "userId": "uuid",
+  "origin": "JFK",
+  "destination": "LAX",
+  "priceThreshold": 350.00,
+  "departureStart": "2025-05-01",
+  "departureEnd": "2025-05-10"
+}

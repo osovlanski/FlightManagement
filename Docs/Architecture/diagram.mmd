@@ -1,0 +1,45 @@
+graph TD
+    subgraph "External Sources"
+        A1[Airline APIs]
+        A2[Price Comparison Services]
+        A1 & A2 --> B1[Price Data Collector Service]
+    end
+
+    subgraph "Data Ingestion Layer"
+        B1 --> B2[Data Normalization Service]
+    end
+
+    subgraph "Core Processing"
+        B2 --> C1[Alert Matching Engine]
+        C1 <--> C2[(Alert Database)]
+        C1 <--> C3[(User Database)]
+        C1 <--> C4[(Price History Database)]
+    end
+
+    subgraph "Alert Management API"
+        D1[Alert & User Management Service]
+        D1 <--> C2
+        D1 <--> C3
+    end
+
+    subgraph "Notification System"
+        C1 --> E1[Notification Queue]
+        E1 --> E2[Notification Service]
+        E2 --> E3[Delivery Status Tracker]
+    end
+
+    subgraph "Mobile Clients"
+        F1[Mobile App]
+        F2[iOS App]
+        F3[Android App]
+        E2 --> F1
+        F1 <--> D1
+        F1 <--> F2
+        F1 <--> F3
+    end
+
+    subgraph "Monitoring & Analytics"
+        G1[Monitoring & Analytics Engine]
+        E3 --> G1
+        C1 --> G1
+    end

@@ -1,0 +1,13 @@
+﻿Final Flow Summary
+1. Data is received from external sources (Airline APIs and Price Comparison Services) by the Price Data Collector Service.
+
+2. Collected data is normalized and forwarded to the Alert Matching Engine.
+
+3. The Alert Matching Engine cross-checks this data against stored user alerts and historical price data.
+
+4. When a match is found, notifications are queued, processed, and delivered to users via their Mobile App.
+
+5. Users can manage both alerts and their personal data through a consolidated Alert & User Management Service.
+
+6. All key components are monitored and analyzed through the Monitoring & Analytics Engine to ensure smooth operation and effective troubleshooting.
+

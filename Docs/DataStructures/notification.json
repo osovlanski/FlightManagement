@@ -1,0 +1,12 @@
+{
+  "notificationId": "uuid-string",
+  "userId": "user-uuid-string",
+  "alertId": "alert-uuid-string",
+  "priceId": "price-uuid-string",
+  "message": "Flight price alert: $325 from JFK to LAX!",
+  "deepLink": "flightapp://alerts/details/alert-id",
+  "status": "queued/sent/delivered/failed",
+  "createdAt": "timestamp",
+  "sentAt": "timestamp",
+  "deliveredAt": "timestamp"
+}

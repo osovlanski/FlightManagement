@@ -1,0 +1,97 @@
+﻿Detailed Component Flow
+1. External Sources
+- Components:
+-- Airline APIs
+-- Price Comparison Services
+
+- Function:
+These sources provide raw flight price data to the system. Whether from airline-specific APIs or third-party price aggregators. 
+They serve as the input data that drives the alerting mechanism.
+
+- Flow:
+Both sources send their data to the Price Data Collector Service.
+
+2. Data Ingestion Layer
+- Component:
+-- Price Data Collector Service
+-- Data Normalization Service
+
+- Function:
+The Price Data Collector Service is responsible for gathering raw data periodically, 
+while the Data Normalization Service converts this data into a consistent format 
+that the following layers of the system can process reliably.
+
+- Flow:
+-- The Collector Service passes the raw data to the Normalization Service, ensuring that all flight price details conform to an expected structure.
+
+3. Core Processing
+- Components:
+-- Alert Matching Engine
+-- Alert Database
+-- User Database
+-- Price History Database
+
+- Function:
+The Alert Matching Engine is the core processing unit. It compares normalized price data against user-defined alerts stored in the Alert Database. 
+In addition, it references the User Database and maintains a history in the Price History Database.
+
+- Flow:
+-- Data Input: Normalized price data from the Data Ingestion Layer is fed into the Alert Matching Engine.
+-- Data Comparison: It consults the Alert Database to determine if any user-defined conditions are met.
+-- User and Price Data: It also references the User Database for user-specific information and logs historical price data in the Price History Database as needed.
+
+4. Alert Management API
+- Component:
+-- Alert & User Management Service
+
+- Function:
+This unified API handles CRUD operations for user alerts and also manages user profiles (including their preferences and device tokens). 
+Consolidating these functions simplifies the API surface and offers a single entry point for managing both alerts and user information.
+
+- Flow:
+-- Outgoing Data Dependency:
+It interacts with both the Alert Database and User Database—retrieving, modifying, and storing records as appropriate.
+
+5. Notification System
+- Components:
+-- Notification Queue
+-- Notification Service
+-- Delivery Status Tracker
+
+Function:
+Once the Alert Matching Engine identifies a price that meets alert criteria, a notification message is sent to the Notification Queue. 
+The Notification Service then processes these messages, dispatching push notifications to mobile clients. 
+The Delivery Status Tracker monitors the success of these notifications.
+
+- Flow:
+-- Trigger: Alert Matching Engine pushes notifications to the queue.
+-- Processing: Notification Service dequeues messages and sends them.
+-- Tracking: The Delivery Status Tracker logs and updates the status of each notification.
+
+6. Mobile Clients
+- Component:
+-- Mobile App:
+--- iOS App
+--- Android App
+
+- Function:
+Represents all mobile clients (whether iOS or Android) as a single unified node. 
+This app receives push notifications from the Notification Service and interacts with the Alert Management API to submit or modify alert settings.
+
+- Flow:
+-- Notification Reception: The Mobile App receives push notifications dispatched by the Notification Service.
+-- User Interaction: It also communicates directly with the Alert & User Management Service to manage user preferences and alerts.
+
+
+7. Monitoring & Analytics
+- Component:
+-- Monitoring & Analytics Engine
+
+- Function:
+This engine provides insights into system performance, usage metrics, and operational health. 
+
+- Flow:
+-- Data Collection:
+The Monitoring & Analytics Engine collects metrics from key components like the Alert Matching Engine and the Delivery Status Tracker.
+--Insights:
+This data is used to generate reports, detect anomalies, and ensure the system is performing as expected.

@@ -1,0 +1,17 @@
+{
+  "priceId": "uuid-string",
+  "route": {
+    "origin": "JFK",
+    "destination": "LAX"
+  },
+  "departureDate": "2025-05-05",
+  "returnDate": "2025-05-15", // null for one-way
+  "price": 325.50,
+  "currency": "USD",
+  "airline": "AA",
+  "cabinClass": "economy",
+  "stops": 1,
+  "url": "https://example.com/booking-link",
+  "captureTime": "timestamp",
+  "expiryTime": "timestamp" // When price is expected to expire
+}

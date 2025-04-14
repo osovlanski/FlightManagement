@@ -1,0 +1,5 @@
+{
+  "userId": "uuid",
+  "email": "user@example.com",
+  "deviceTokens": [{ "token": "string" }]
+}
